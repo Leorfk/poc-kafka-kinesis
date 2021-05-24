@@ -1,0 +1,11 @@
+kafka:
+  bootstrap-servers: '127.0.0.1:9092'
+  producer:
+    key-serializer-class: 'org.apache.kafka.common.serialization.StringSerializer'
+    value-serializer-class: 'org.apache.kafka.common.serialization.StringSerializer'
+    topic: 'ECOMMERCE_NEW_ORDER'
+  consumer:
+    key-deserializer-class: 'org.apache.kafka.common.serialization.StringDeserializer'
+    value-deserializer-class: 'org.apache.kafka.common.serialization.StringDeserializer'
+    topics: 'ECOMMERCE_NEW_ORDER'
+    group-id: 'consumer-top'
