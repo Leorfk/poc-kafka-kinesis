@@ -47,6 +47,13 @@
 			<version>0.14.6</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-kinesis</artifactId>
+			<version>1.11.1024</version>
+		</dependency>
+
+
 		<!--kafka-->
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
