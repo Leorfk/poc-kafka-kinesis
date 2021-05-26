@@ -1,7 +1,8 @@
 package br.com.multivisao.producerKinesis.controllers;
 
+import br.com.multivisao.producerKinesis.configs.KinesisConfiguration;
 import br.com.multivisao.producerKinesis.services.KafkaService;
-import br.com.multivisao.producerKinesis.services.KinesisProducerService;
+import br.com.multivisao.producerKinesis.services.KinesisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,10 @@ public class KafkaController {
     private KafkaService kafkaProducerService;
 
     @Autowired
-    private KinesisProducerService kinesisProducerService;
+    private KinesisConfiguration kinesisConfiguration;
+
+    @Autowired
+    private KinesisService kinesisService;
 
     @PostMapping("/produce")
     public ResponseEntity<String> produce(@RequestBody String message){
@@ -30,17 +34,12 @@ public class KafkaController {
         return ResponseEntity.ok().body("mensagens lidas");
     }
 
-    @GetMapping("kinesis")
-    public void xama(){
+    @PostMapping("funciona")
+    public void kinesisVai(@RequestParam String id, @RequestBody String dado){
         try {
-            kinesisProducerService.produce();
+            kinesisService.putRecords(dado, id, "xap", kinesisConfiguration.createProducer());
         } catch (UnsupportedEncodingException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-    }
-
-    @GetMapping("teste")
-    public void mama(){
-        kinesisProducerService.mamus();
     }
 }

@@ -1,3 +1,5 @@
+server:
+  port: 8080
 kafka:
   bootstrap-servers: '127.0.0.1:9092'
   producer:
@@ -9,3 +11,9 @@ kafka:
     value-deserializer-class: 'org.apache.kafka.common.serialization.StringDeserializer'
     topics: 'ECOMMERCE_NEW_ORDER'
     group-id: 'consumer-top'
+aws:
+  access-key: 'test'
+  secret-key: 'test'
+  region: 'us-west-1'
+  kinesis:
+    stream-name: 'xap'
