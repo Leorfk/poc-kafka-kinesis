@@ -33,8 +33,6 @@ public class KafkaController {
     @GetMapping("consume/orders")
     public ResponseEntity<String> consume(){
         kafkaProducerService.consumeMessageOrders();
-        kafkaProducerService.consumeMessageEmails();
-        kafkaProducerService.consumeMessagelogs();
         return ResponseEntity.ok().body("mensagens lidas");
     }
 }
