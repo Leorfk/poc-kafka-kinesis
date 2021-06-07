@@ -1,16 +1,11 @@
 package br.com.multivisao.producerKinesis.controllers;
 
-import br.com.multivisao.producerKinesis.configs.KinesisConfiguration;
 import br.com.multivisao.producerKinesis.dtos.ClientDTO;
-import br.com.multivisao.producerKinesis.models.Client;
-import br.com.multivisao.producerKinesis.services.KafkaService;
-import br.com.multivisao.producerKinesis.services.KinesisService;
+import br.com.multivisao.producerKinesis.services.KafkaProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -18,21 +13,16 @@ import java.util.concurrent.ExecutionException;
 public class KafkaController {
 
     @Autowired
-    private KafkaService kafkaProducerService;
+    private KafkaProducerService kafkaProducerService;
 
     @PostMapping("produce")
     public ResponseEntity<String> produce(@RequestBody ClientDTO message){
         try {
-            kafkaProducerService.produceMessage(message);
+            for (var i = 0; i < 10; i++)
+                kafkaProducerService.produceMessage(message);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return ResponseEntity.ok().body("Recurso criado");
-    }
-
-    @GetMapping("consume/orders")
-    public ResponseEntity<String> consume(){
-        kafkaProducerService.consumeMessageOrders();
-        return ResponseEntity.ok().body("mensagens lidas");
     }
 }
