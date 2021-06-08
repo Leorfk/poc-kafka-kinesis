@@ -1,6 +1,5 @@
-package br.com.multivisao.producerKinesis.services;
+package br.com.multivisao.producerKinesis.services.kafka;
 
-import br.com.multivisao.producerKinesis.consumers.EmailService;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -12,12 +11,12 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.UUID;
 
-public class KafkaService implements Closeable {
+public class KafkaConsumerService implements Closeable {
 
     private final KafkaConsumer<String, String> consumer;
     private final ConsumerFunction parse;
 
-    public KafkaService(String groupId, String topic, ConsumerFunction parse) {
+    public KafkaConsumerService(String groupId, String topic, ConsumerFunction parse) {
         this.parse = parse;
         this.consumer = new KafkaConsumer<String, String>(properties(groupId));
         consumer.subscribe(Collections.singletonList(topic));

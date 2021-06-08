@@ -1,6 +1,6 @@
 package br.com.multivisao.producerKinesis.consumers;
 
-import br.com.multivisao.producerKinesis.services.KafkaService;
+import br.com.multivisao.producerKinesis.services.kafka.KafkaConsumerService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.io.IOException;
@@ -9,7 +9,7 @@ public class EmailService {
 
     public static void main(String[] args) throws IOException {
         var emailService = new EmailService();
-        try(var kafkaService = new KafkaService(EmailService.class.getSimpleName(),"ECOMMERCE_SEND_EMAIL", emailService::parse)) {
+        try(var kafkaService = new KafkaConsumerService(EmailService.class.getSimpleName(),"ECOMMERCE_SEND_EMAIL", emailService::parse)) {
             kafkaService.run();
         }
     }

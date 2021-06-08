@@ -1,5 +1,6 @@
 package br.com.multivisao.producerKinesis.services;
 
+import br.com.multivisao.producerKinesis.services.kafka.KafkaDispatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

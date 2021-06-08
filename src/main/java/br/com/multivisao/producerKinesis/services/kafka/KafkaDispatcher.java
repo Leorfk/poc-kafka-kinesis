@@ -1,4 +1,4 @@
-package br.com.multivisao.producerKinesis.services;
+package br.com.multivisao.producerKinesis.services.kafka;
 
 import br.com.multivisao.producerKinesis.configs.KafkaConfiguration;
 import org.apache.kafka.clients.producer.Callback;

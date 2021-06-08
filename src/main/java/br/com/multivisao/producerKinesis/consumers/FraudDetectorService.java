@@ -1,6 +1,6 @@
 package br.com.multivisao.producerKinesis.consumers;
 
-import br.com.multivisao.producerKinesis.services.KafkaService;
+import br.com.multivisao.producerKinesis.services.kafka.KafkaConsumerService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.io.IOException;
@@ -9,7 +9,7 @@ public class FraudDetectorService {
 
     public static void main(String[] args) throws IOException {
         var fraudService = new FraudDetectorService();
-        try(var service = new KafkaService(FraudDetectorService.class.getSimpleName(),"ECOMMERCE_NEW_ORDER", fraudService::parse)){
+        try(var service = new KafkaConsumerService(FraudDetectorService.class.getSimpleName(),"ECOMMERCE_NEW_ORDER", fraudService::parse)){
             service.run();
         }
     }

@@ -1,4 +1,4 @@
-package br.com.multivisao.producerKinesis.services;
+package br.com.multivisao.producerKinesis.services.kafka;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
