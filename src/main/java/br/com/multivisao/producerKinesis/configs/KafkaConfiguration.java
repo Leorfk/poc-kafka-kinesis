@@ -36,7 +36,7 @@ public class KafkaConfiguration {
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, broker);
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, keyDeserializer);
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, keyDeserializer);
-//        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+        properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); //latest
         return properties;
     }
 }
