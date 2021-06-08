@@ -23,7 +23,7 @@ public class KafkaProducerService {
     @Autowired
     private KafkaConfiguration kafkaConfiguration;
 
-    @Value("${kafka.producer.topic}")
+    @Value("${kafka.topics.order}")
     private String topic;
 
     public void produceMessage(ClientDTO clientDto) throws ExecutionException, InterruptedException {

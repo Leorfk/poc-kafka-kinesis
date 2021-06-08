@@ -3,14 +3,12 @@ kafka:
   producer:
     key-serializer-class: 'org.apache.kafka.common.serialization.StringSerializer'
     value-serializer-class: 'org.apache.kafka.common.serialization.StringSerializer'
-    topic: 'ECOMMERCE_NEW_ORDER'
   consumer:
     key-deserializer-class: 'org.apache.kafka.common.serialization.StringDeserializer'
     value-deserializer-class: 'org.apache.kafka.common.serialization.StringDeserializer'
-    topics:
-      order: 'ECOMMERCE_NEW_ORDER'
-      email: 'ECOMMERCE_SEND_EMAIL'
-    group-id: 'consumer-top'
+  topics:
+    order: 'ECOMMERCE_NEW_ORDER'
+    email: 'ECOMMERCE_SEND_EMAIL'
 aws:
   access-key: 'test'
   secret-key: 'test'

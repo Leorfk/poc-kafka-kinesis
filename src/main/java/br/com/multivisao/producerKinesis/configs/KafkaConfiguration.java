@@ -5,9 +5,8 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
 import java.util.Properties;
+
 @Configuration
 public class KafkaConfiguration {
 
@@ -21,8 +20,6 @@ public class KafkaConfiguration {
     private String keyDeserializer;
     @Value("${kafka.consumer.value-deserializer-class}")
     private String valueDeserializer;
-    @Value("${kafka.consumer.group-id}")
-    private String groupId;
 
     @Bean
     public Properties producerConfig(){
@@ -39,7 +36,7 @@ public class KafkaConfiguration {
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, broker);
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, keyDeserializer);
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, keyDeserializer);
-        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+//        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         return properties;
     }
 }
