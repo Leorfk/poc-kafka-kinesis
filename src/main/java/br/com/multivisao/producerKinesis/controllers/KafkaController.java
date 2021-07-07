@@ -31,7 +31,7 @@ public class KafkaController {
     }
 
     @PostMapping("produce/v2")
-    public ResponseEntity<String> producev2(@RequestBody ClientDTO message){
+    public ResponseEntity<String> producev2(@RequestBody ClientDTO message) throws ExecutionException, InterruptedException {
             for (var i = 0; i < 10; i++)
                 kafkaProducerV2Service.produce();
         return ResponseEntity.ok().body("Recurso criado");
