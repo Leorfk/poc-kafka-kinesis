@@ -1,5 +1,6 @@
 package br.com.multivisao.producerKinesis.services;
 
+import br.com.multivisao.producerKinesis.models.Email;
 import br.com.multivisao.producerKinesis.models.Order;
 import br.com.multivisao.producerKinesis.services.kafka.KafkaDispatcher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class KafkaProducerV2Service {
     private KafkaDispatcher<Order> orderDispatcher;
 
     @Autowired
-    private KafkaDispatcher<String> emailDispatcher;
+    private KafkaDispatcher<Email> emailDispatcher;
 
     @Value("${kafka.topics.order}")
     private String orderTopic;
@@ -33,7 +34,7 @@ public class KafkaProducerV2Service {
         var order = new Order(userId, orderId, amount);
 
         orderDispatcher.send(emailTopic, userId, order);
-        var email = "Fez a boa";
+        var email = new Email("test@test", "fez a boa");
         emailDispatcher.send(orderTopic, userId, email);
     }
 }
