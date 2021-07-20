@@ -9,7 +9,10 @@ public class FraudDetectorService {
 
     public static void main(String[] args) throws IOException {
         var fraudService = new FraudDetectorService();
-        try(var service = new KafkaConsumerService(FraudDetectorService.class.getSimpleName(),"ECOMMERCE_NEW_ORDER", fraudService::parse)){
+        try(var service = new KafkaConsumerService(
+                FraudDetectorService.class.getSimpleName(),
+                "ECOMMERCE_NEW_ORDER",
+                fraudService::parse)){
             service.run();
         }
     }
