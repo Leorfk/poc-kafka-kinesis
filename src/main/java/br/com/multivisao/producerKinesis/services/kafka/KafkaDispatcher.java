@@ -6,16 +6,18 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 @Service
-public class KafkaDispatcher {
+public class KafkaDispatcher<T> implements Closeable {
 
     @Autowired
     private KafkaConfiguration configuration;
-    private KafkaProducer<String, String> producer;
+    private KafkaProducer<String, T> producer;
 
-    public void send(String topic, String key, String value) throws ExecutionException, InterruptedException {
+    public void send(String topic, String key, T value) throws ExecutionException, InterruptedException {
          this.producer = new KafkaProducer<>(configuration.producerConfig());
         var record = new ProducerRecord<>(topic, key, value);
         Callback callback = (data, e) -> {
@@ -30,5 +32,10 @@ public class KafkaDispatcher {
                     "timestamp" + data.timestamp());
         };
         producer.send(record, callback).get();
+    }
+
+    @Override
+    public void close() throws IOException {
+        producer.close();
     }
 }
